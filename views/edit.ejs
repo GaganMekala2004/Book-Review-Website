@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Book Review</title>
+  <link rel="stylesheet" href="/styles/edit.css"> <!-- Ensure correct path -->
+</head>
+<body>
+  <div class="container">
+    <h1>Edit Book Review</h1>
+    <form action="/edit-book" method="POST">
+      <div>
+        <label for="title">Edit Title:</label>
+        <br>
+        <input type="text" id="title" name="title" value="<%= book.title %>" required>
+      </div>
+      <div>
+        <label for="author">Edit Author:</label>
+        <br>
+        <input type="text" id="author" name="author" value="<%= book.author %>" required>
+      </div>
+      <div>
+        <label for="review">Edit Review:</label>
+        <br>
+        <textarea id="review" name="review" rows="5" required><%= book.review %></textarea>
+      </div>
+      <div>
+        <label for="rating">Edit Rating:</label>
+        <br>
+        <input type="number" id="rating" name="rating" value="<%= book.rating %>" required>
+      </div>
+      <div>
+        <label for="isbn">Edit ISBN:</label>
+        <br>
+        <input type="number" id="isbn" name="isbn" value="<%= book.isbn %>" readonly>
+      </div>
+      <div>
+        <br>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

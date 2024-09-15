@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Website</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <%- include("partials/header.ejs") %>
+  <h1>Book Reviews</h1>
+
+  <!-- Button to add a new book -->
+  <form action="/add" method="GET" class="add-book">
+    <input type="submit" value="Add Book">
+  </form>
+
+  <!-- Search bar -->
+  <form action="/search" method="GET" class="search-form">
+    <input type="text" name="query" placeholder="Search books..." required>
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Sort options -->
+  <form action="/" method="GET" class="sort-form">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort">
+      <option value="title">Title</option>
+      <option value="author">Author</option>
+      <option value="rating">Rating</option>
+    </select>
+    <button type="submit">Sort</button>
+  </form>
+
+  <!-- If there are books, display them -->
+  <% if (books.length > 0) { %>
+    <ul class="book-list">
+      <% books.forEach((book) => { %>
+        <li class="book-item">
+          <div class="book-info">
+            <h2 class="book-title">Title: <%= book.title %></h2>
+            <p><strong>Author:</strong> <%= book.author %></p>
+            <p class="book-review"><strong>Review:</strong> <%= book.review %></p>
+            <p><strong>Rating:</strong> <%= book.rating %> / 5</p>
+            <p><strong>ISBN:</strong> <%= book.isbn %></p>
+
+            <!-- Display book cover if available -->
+            <p><strong>Cover:</strong></p>
+            <img src="<%= book.cover %>" alt="Cover for <%= book.title %>" class="book-cover">
+
+            <!-- Space between the cover and buttons -->
+            <div class="book-buttons">
+              <!-- Button to edit the book review -->
+              <form action="/edit/<%= book.isbn %>" method="GET" class="book-form">
+                <input type="submit" value="Edit Review" class="edit-btn">
+              </form>
+
+              <!-- Button to delete the book review -->
+              <form action="/delete/<%= book.isbn %>" method="POST" class="book-form" onsubmit="return confirm('Are you sure you want to delete this review?');">
+                <input type="submit" value="Delete Review" class="delete-btn">
+              </form>
+            </div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No book reviews yet. Add one!</p>
+  <% } %>
+ 
+  <%- include("partials/footer.ejs") %>
+</body>
+</html>

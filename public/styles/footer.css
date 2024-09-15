@@ -1,0 +1,12 @@
+footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    color: #1E90FF; /* Blue color for the text */
+    border-top: 1px solid #1E90FF; /* Blue border-top */
+}
+
+footer p {
+    margin: 0;
+    padding: 5px 0;
+}
